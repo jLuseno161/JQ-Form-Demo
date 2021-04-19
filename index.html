@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <title></title>
+    <style>
+        .container-align {
+            margin: auto;
+            width: 40%;
+        }
+
+        form {
+            font-size: 20pt;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-align">
+        <form class="form-horizontal container register-form">
+            <div class="alert alert-success fs14">
+                <strong>Thanks for registering for the <span id="chosenTrack"></span> Track <span
+                        id="student"></span></strong>.<br>
+                Reason for Joining - <span id="reason"></span><br>
+                Languages - <span id="myLanguages"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label fs14">Enter your Name</label>
+                <input id="fullName" type="text" name="fullName" placeholder="Enter your Full Name"
+                    class="form-control fs11">
+            </div>
+            <div class="form-group">
+                <label class="control-label fs14">Choose Track</label>
+                <div class="rdio rdio-default fs11">
+                    <input type="radio" name="track" id="android" value="android">
+                    <label for="android"> Android</label>
+                </div>
+                <div class="rdio rdio-default fs11">
+                    <input type="radio" name="track" id="fullstack" value="fullstack">
+                    <label for="fullstack"> Fullstack</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label fs14">What is the main outcome you hope to get from Moringa?</label>
+                <select id="outcome" class="form-control fs11">
+                    <option value=""> - </option>
+                    <option value="Strengthening my completed degree to find a job">Strengthening my completed degree to
+                        find a job</option>
+                    <option value="No degree but I'm looking to get a Certificate">No degree but I'm looking to get a
+                        Certificate</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label fs14">Which Languages are you familiar with?</label>
+                <div class="ckbox ckbox-default fs11">
+                    <input type="checkbox" value="javascript" name="languages" id="javascript">
+                    <label for="javascript"> JavaScript</label>
+                </div>
+                <div class="ckbox ckbox-default fs11">
+                    <input type="checkbox" value="python" name="languages" id="python">
+                    <label for="python"> Python</label>
+                </div>
+                <div class="ckbox ckbox-default fs11">
+                    <input type="checkbox" value="java" name="languages" id="java">
+                    <label for="java"> Java</label>
+                </div>
+                <div class="ckbox ckbox-default fs11">
+                    <input type="checkbox" value="none" name="languages" id="none">
+                    <label for="none"> None</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-sm btn-block btn-warning">Register!</button>
+        </form>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        $("div.alert").hide(); // Hides the alert message once the Doc loads
+
+        $(".register-form").submit(function (event) {
+
+            // Getting the User Input
+            let studentName = $("#fullName").val(); // Get value from Input
+            let chosenTrack = $('input[name="track"]:checked')
+                .val(); // Get value from radio Button
+            let reason = $("#outcome").val(); // Get value from Select
+            let selectedLanguages =
+                new Array(); // data point for select languages from checkboxes
+            $('input[name="languages"]:checked').each(function () {
+                selectedLanguages.push(this
+                    .value); // adding selected checkboxes' values to our array
+            });
+
+            // Displaying the Values
+            $("#student").text(studentName); // appends value from user input
+            $("#chosenTrack").text(chosenTrack); // appends value from user input
+            $("#reason").text(reason); // appends value from user input
+            $("#myLanguages").text(selectedLanguages.join(", "));
+
+            // Converts array into a string using the join() appends string 
+            $("div.alert").show(); // displays the alert message
+            event.preventDefault(); // Prevents the page from refreshing and losing data        
+        })
+    })
+</script>
+
+</html>
